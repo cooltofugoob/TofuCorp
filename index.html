@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bnuy Park - Игровая Платформа</title>
+    <title>Bnuy Park</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -30,9 +30,27 @@
             min-height: 100vh;
             background-attachment: fixed;
             line-height: 1.6;
+            cursor: default;
         }
 
-        /* Шапка */
+        /* Water ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+            border: 2px solid rgba(100, 255, 218, 0.7);
+            animation: ripple-effect 0.6s linear;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
         header {
             background: rgba(18, 19, 44, 0.92);
             backdrop-filter: blur(10px);
@@ -100,30 +118,7 @@
             width: 100%;
         }
 
-        .lang-switcher {
-            margin-left: 1rem;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .lang-btn {
-            background: rgba(100, 255, 218, 0.1);
-            color: var(--text);
-            border: none;
-            border-radius: 16px;
-            padding: 0.4rem 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .lang-btn.active {
-            background: var(--accent);
-            color: var(--dark);
-            font-weight: 600;
-        }
-
-        /* Главный экран */
+        /* Hero section */
         .hero {
             padding: 8rem 5% 6rem;
             text-align: center;
@@ -232,7 +227,7 @@
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
 
-        /* Секция с действиями */
+        /* Action section */
         .action-section {
             padding: 6rem 5%;
             background: rgba(10, 11, 29, 0.7);
@@ -299,7 +294,7 @@
             opacity: 0.9;
         }
 
-        /* Футер */
+        /* Footer */
         footer {
             background: rgba(10, 11, 29, 0.95);
             padding: 4rem 5% 2rem;
@@ -393,7 +388,7 @@
             margin-top: 3rem;
         }
 
-        /* Анимации */
+        /* Animations */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-20px);}
@@ -415,7 +410,7 @@
             100% {transform: translateY(0px);}
         }
 
-        /* Адаптивность */
+        /* Responsive design */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 3rem;
@@ -440,12 +435,6 @@
                 flex-direction: column;
                 gap: 2rem;
             }
-
-            .lang-switcher {
-                margin-top: 1rem;
-                width: 100%;
-                justify-content: center;
-            }
         }
 
         @media (max-width: 480px) {
@@ -464,7 +453,7 @@
     </style>
 </head>
 <body>
-    <!-- Шапка сайта -->
+    <!-- Header -->
     <header>
         <div class="logo">
             <i class="fas fa-gamepad logo-icon floating"></i>
@@ -472,30 +461,26 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
-                <li><a href="#"><i class="fas fa-gamepad"></i> Игры</a></li>
-                <li><a href="#"><i class="fas fa-download"></i> Лаунчер</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Сообщество</a></li>
-                <div class="lang-switcher">
-                    <button class="lang-btn active">RU</button>
-                    <button class="lang-btn">EN</button>
-                </div>
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li><a href="#"><i class="fas fa-download"></i> Launcher</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Community Server</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Главный экран -->
+    <!-- Hero section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Играйте. Открывайте. Наслаждайтесь.</h1>
-            <p>Bnuy Park - игровая платформа премиум-класса с тщательно отобранными играми. Наслаждайтесь эксклюзивными проектами, созданными профессиональными разработчиками.</p>
+            <h1>Play. Discover. Enjoy.</h1>
+            <p>Bnuy Park is a game launcher for our own hosted games, feel free to join.</p>
             
             <div class="cta-buttons">
                 <a href="#" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Скачать лаунчер
+                    <i class="fas fa-download"></i> Download Launcher
                 </a>
                 <a href="#" class="btn btn-secondary">
-                    <i class="fas fa-play"></i> Играть онлайн
+                    <i class="fas fa-play"></i> Play Online
                 </a>
             </div>
             
@@ -504,45 +489,45 @@
                     <div class="feature-icon">
                         <i class="fas fa-crown"></i>
                     </div>
-                    <h3>Премиум игры</h3>
-                    <p>Эксклюзивные проекты, созданные профессиональными разработчиками</p>
+                    <h3>Selected Experiences</h3>
+                    <p>We host only good, yet specified games.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Мгновенный запуск</h3>
-                    <p>Начните играть в один клик без сложных настроек</p>
+                    <h3>Instant Access</h3>
+                    <p>Install 'n Play, nothing else.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Безопасная среда</h3>
-                    <p>Все игры проходят строгую модерацию перед публикацией</p>
+                    <h3>24/7 Uptime</h3>
+                    <p>We use long-standing servers to ensure it has the biggest uptime.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Секция с действиями -->
+    <!-- Action section -->
     <section class="action-section">
         <div class="action-container">
             <div class="action-text">
-                <h2>Начните играть прямо сейчас</h2>
-                <p>Bnuy Park предоставляет доступ к эксклюзивным игровым мирам, созданным нашими профессиональными разработчиками. Каждая игра проходит строгий отбор и модерацию перед публикацией.</p>
-                <p>Пользователям доступны:</p>
+                <h2>Start Playing Today</h2>
+                <p>Bnuy Park provides access to GOON.</p>
+                <p>Players enjoy:</p>
                 <ul style="padding-left: 1.5rem; margin: 1.5rem 0;">
-                    <li>Быстрый запуск игр в один клик</li>
-                    <li>Регулярное обновление игровой библиотеки</li>
-                    <li>Стабильная работа без лагов</li>
-                    <li>Мультиплеер с друзьями</li>
-                    <li>Достижения и рейтинги</li>
+                    <li>One-click game launching</li>
+                    <li>Regular content updates</li>
+                    <li>Smooth performance</li>
+                    <li>Multiplayer with friends</li>
+                    <li>Achievements and leaderboards</li>
                 </ul>
                 <a href="#" class="btn btn-primary">
-                    <i class="fas fa-gamepad"></i> Перейти к играм
+                    <i class="fas fa-gamepad"></i> Explore Games
                 </a>
             </div>
             <div class="action-image">
@@ -551,12 +536,12 @@
         </div>
     </section>
 
-    <!-- Футер -->
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-about">
                 <div class="footer-logo">Bnuy Park</div>
-                <p>Платформа премиум-игр с эксклюзивными проектами от профессиональных разработчиков. Все игры проходят строгую проверку перед публикацией.</p>
+                <p>A selective experiences platform.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-discord"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -566,29 +551,50 @@
             </div>
             
             <div class="footer-links-container">
-                <h3 class="footer-heading">Платформа</h3>
+                <h3 class="footer-heading">Platform</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Все игры</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Системные требования</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Частые вопросы</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Статус сервера</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Server Status</a></li>
                 </ul>
             </div>
             
             <div class="footer-links-container">
-                <h3 class="footer-heading">Поддержка</h3>
+                <h3 class="footer-heading">Other</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Служба поддержки</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Сообщить о проблеме</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Политика конфиденциальности</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Условия использования</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2023 Bnuy Park. Все права защищены. Все игры являются собственностью их разработчиков.
+            &copy; 2025 Bnuy Park. Our clients and servers are not affiliated with Roblox trademark and Roblox Corporation.
         </div>
     </footer>
+
+    <!-- Water ripple effect script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                // Create ripple element
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                
+                // Position at click location
+                ripple.style.left = `${e.clientX}px`;
+                ripple.style.top = `${e.clientY}px`;
+                
+                // Add to body
+                document.body.appendChild(ripple);
+                
+                // Remove after animation completes
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    </script>
 </body>
 </html>
