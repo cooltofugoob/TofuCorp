@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bnuy Park - Игровая Платформа</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4fc3f7;
+            --dark: #12132c;
+            --darker: #0a0b1d;
+            --light: #f8f9fa;
+            --accent: #64ffda;
+            --text: #e0e0ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+
+        /* Шапка */
+        header {
+            background: rgba(18, 19, 44, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .lang-switcher {
+            margin-left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--text);
+            border: none;
+            border-radius: 16px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* Главный экран */
+        .hero {
+            padding: 8rem 5% 6rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--text);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 280px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), #8a7fff);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            border: 2px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Секция с действиями */
+        .action-section {
+            padding: 6rem 5%;
+            background: rgba(10, 11, 29, 0.7);
+            margin-top: 4rem;
+        }
+
+        .action-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .action-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .action-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, #12132c, #1e2a5a);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .action-image::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .action-image i {
+            font-size: 10rem;
+            color: rgba(100, 255, 218, 0.15);
+            z-index: 2;
+        }
+
+        .action-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* Футер */
+        footer {
+            background: rgba(10, 11, 29, 0.95);
+            padding: 4rem 5% 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            color: #a0a0ff;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #a0a0ff;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            color: #7777aa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.05);
+            margin-top: 3rem;
+        }
+
+        /* Анимации */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {transform: translateY(0px);}
+            50% {transform: translateY(-20px);}
+            100% {transform: translateY(0px);}
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .lang-switcher {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                padding: 6rem 5% 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gamepad logo-icon floating"></i>
+            <div class="logo-text">Bnuy Park</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="#"><i class="fas fa-gamepad"></i> Игры</a></li>
+                <li><a href="#"><i class="fas fa-download"></i> Лаунчер</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Сообщество</a></li>
+                <div class="lang-switcher">
+                    <button class="lang-btn active">RU</button>
+                    <button class="lang-btn">EN</button>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Играйте. Открывайте. Наслаждайтесь.</h1>
+            <p>Bnuy Park - игровая платформа премиум-класса с тщательно отобранными играми. Наслаждайтесь эксклюзивными проектами, созданными профессиональными разработчиками.</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Скачать лаунчер
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-play"></i> Играть онлайн
+                </a>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Премиум игры</h3>
+                    <p>Эксклюзивные проекты, созданные профессиональными разработчиками</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Мгновенный запуск</h3>
+                    <p>Начните играть в один клик без сложных настроек</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Безопасная среда</h3>
+                    <p>Все игры проходят строгую модерацию перед публикацией</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с действиями -->
+    <section class="action-section">
+        <div class="action-container">
+            <div class="action-text">
+                <h2>Начните играть прямо сейчас</h2>
+                <p>Bnuy Park предоставляет доступ к эксклюзивным игровым мирам, созданным нашими профессиональными разработчиками. Каждая игра проходит строгий отбор и модерацию перед публикацией.</p>
+                <p>Пользователям доступны:</p>
+                <ul style="padding-left: 1.5rem; margin: 1.5rem 0;">
+                    <li>Быстрый запуск игр в один клик</li>
+                    <li>Регулярное обновление игровой библиотеки</li>
+                    <li>Стабильная работа без лагов</li>
+                    <li>Мультиплеер с друзьями</li>
+                    <li>Достижения и рейтинги</li>
+                </ul>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-gamepad"></i> Перейти к играм
+                </a>
+            </div>
+            <div class="action-image">
+                <i class="fas fa-chess-queen"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">Bnuy Park</div>
+                <p>Платформа премиум-игр с эксклюзивными проектами от профессиональных разработчиков. Все игры проходят строгую проверку перед публикацией.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Платформа</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Все игры</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Системные требования</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Частые вопросы</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Статус сервера</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Поддержка</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Служба поддержки</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Сообщить о проблеме</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Политика конфиденциальности</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Условия использования</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Bnuy Park. Все права защищены. Все игры являются собственностью их разработчиков.
+        </div>
+    </footer>
+</body>
+</html>
