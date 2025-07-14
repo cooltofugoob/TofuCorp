@@ -1,9 +1,10 @@
+<!-- Главная страница (index.html) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bnuy Park</title>
+    <title>Bnuy Park - Premium Gaming Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -116,6 +117,15 @@
 
         nav a:hover:after {
             width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active:after {
+            width: 100%;
+            background: var(--accent);
         }
 
         /* Hero section */
@@ -294,6 +304,186 @@
             opacity: 0.9;
         }
 
+        /* Page content */
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .game-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+
+        .game-thumb {
+            height: 200px;
+            background: linear-gradient(45deg, #4158D0, #C850C0, #FFCC70);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .game-thumb i {
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+
+        .game-info p {
+            color: #c0c0ff;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .play-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(106, 90, 205, 0.3);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .play-btn:hover {
+            background: var(--primary);
+        }
+
+        .download-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .download-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .download-steps {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .step-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .req-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .req-card h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .community-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .community-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+
+        .community-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .community-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
         /* Footer */
         footer {
             background: rgba(10, 11, 29, 0.95);
@@ -431,7 +621,7 @@
                 align-items: center;
             }
 
-            .action-container {
+            .action-container, .download-section {
                 flex-direction: column;
                 gap: 2rem;
             }
@@ -461,10 +651,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#"><i class="fas fa-gamepad"></i> Games</a></li>
-                <li><a href="#"><i class="fas fa-download"></i> Launcher</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Community Server</a></li>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="games.html"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li><a href="launcher.html"><i class="fas fa-download"></i> Launcher</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
             </ul>
         </nav>
     </header>
@@ -473,13 +663,13 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Play. Discover. Enjoy.</h1>
-            <p>Bnuy Park is a game launcher for our own hosted games, feel free to join.</p>
+            <p>Bnuy Park is a premium gaming platform with curated experiences. Enjoy exclusive worlds crafted by professional developers.</p>
             
             <div class="cta-buttons">
-                <a href="#" class="btn btn-primary">
+                <a href="launcher.html" class="btn btn-primary">
                     <i class="fas fa-download"></i> Download Launcher
                 </a>
-                <a href="#" class="btn btn-secondary">
+                <a href="games.html" class="btn btn-secondary">
                     <i class="fas fa-play"></i> Play Online
                 </a>
             </div>
@@ -489,8 +679,8 @@
                     <div class="feature-icon">
                         <i class="fas fa-crown"></i>
                     </div>
-                    <h3>Selected Experiences</h3>
-                    <p>We host only good, yet specified games.</p>
+                    <h3>Premium Experiences</h3>
+                    <p>Exclusive worlds crafted by professional developers</p>
                 </div>
                 
                 <div class="feature-card">
@@ -498,15 +688,15 @@
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Instant Access</h3>
-                    <p>Install 'n Play, nothing else.</p>
+                    <p>Start playing with one click, no complex setup required</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>24/7 Uptime</h3>
-                    <p>We use long-standing servers to ensure it has the biggest uptime.</p>
+                    <h3>Secure Environment</h3>
+                    <p>All experiences undergo strict moderation before release</p>
                 </div>
             </div>
         </div>
@@ -517,7 +707,7 @@
         <div class="action-container">
             <div class="action-text">
                 <h2>Start Playing Today</h2>
-                <p>Bnuy Park provides access to GOON.</p>
+                <p>Bnuy Park provides access to exclusive gaming worlds created by our professional developers. Each experience is carefully curated and moderated before release.</p>
                 <p>Players enjoy:</p>
                 <ul style="padding-left: 1.5rem; margin: 1.5rem 0;">
                     <li>One-click game launching</li>
@@ -526,7 +716,7 @@
                     <li>Multiplayer with friends</li>
                     <li>Achievements and leaderboards</li>
                 </ul>
-                <a href="#" class="btn btn-primary">
+                <a href="games.html" class="btn btn-primary">
                     <i class="fas fa-gamepad"></i> Explore Games
                 </a>
             </div>
@@ -541,7 +731,7 @@
         <div class="footer-content">
             <div class="footer-about">
                 <div class="footer-logo">Bnuy Park</div>
-                <p>A selective experiences platform.</p>
+                <p>A premium gaming platform with exclusive experiences from professional developers. All content is moderated before release.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-discord"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -553,16 +743,18 @@
             <div class="footer-links-container">
                 <h3 class="footer-heading">Platform</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+                    <li><a href="games.html"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
+                    <li><a href="launcher.html"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> Server Status</a></li>
                 </ul>
             </div>
             
             <div class="footer-links-container">
-                <h3 class="footer-heading">Other</h3>
+                <h3 class="footer-heading">Support</h3>
                 <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Report Issue</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
                 </ul>
@@ -570,7 +762,7 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 Bnuy Park. Our clients and servers are not affiliated with Roblox trademark and Roblox Corporation.
+            &copy; 2023 Bnuy Park. All rights reserved. All experiences are properties of their respective creators.
         </div>
     </footer>
 
