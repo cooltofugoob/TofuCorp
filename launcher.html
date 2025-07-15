@@ -1,0 +1,557 @@
+<!-- Страница лаунчера (launcher.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launcher - Bnuy Park</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4fc3f7;
+            --dark: #12132c;
+            --darker: #0a0b1d;
+            --light: #f8f9fa;
+            --accent: #64ffda;
+            --text: #e0e0ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
+            line-height: 1.6;
+            cursor: default;
+        }
+
+        /* Water ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+            border: 2px solid rgba(100, 255, 218, 0.7);
+            animation: ripple-effect 0.6s linear;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(18, 19, 44, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active:after {
+            width: 100%;
+            background: var(--accent);
+        }
+
+        /* Page content */
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .download-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .download-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .download-steps {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .step-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .req-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .req-card h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 11, 29, 0.95);
+            padding: 4rem 5% 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            color: #a0a0ff;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #a0a0ff;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            color: #7777aa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.05);
+            margin-top: 3rem;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {transform: translateY(0px);}
+            50% {transform: translateY(-20px);}
+            100% {transform: translateY(0px);}
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .download-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .page-content {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gamepad logo-icon floating"></i>
+            <div class="logo-text">Bnuy Park</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="games.html"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li><a href="launcher.html" class="active"><i class="fas fa-download"></i> Launcher</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Launcher Content -->
+    <section class="page-content">
+        <h2 class="section-title">Download Launcher</h2>
+        
+        <div class="download-section">
+            <div class="download-info">
+                <h3>Enhanced Gaming Experience</h3>
+                <p>The Bnuy Park launcher provides superior performance and exclusive features not available in the browser version:</p>
+                
+                <div style="text-align: center; margin: 3rem 0;">
+                    <a href="#" class="btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.3rem;">
+                        <i class="fas fa-download"></i> Download for Windows
+                    </a>
+                    <p style="margin-top: 1rem; color: #a0a0ff; font-size: 0.9rem;">
+                        Version 2.4.1 • 85 MB • macOS version coming soon
+                    </p>
+                </div>
+                
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Better Performance</h3>
+                        <p>Higher FPS and faster loading times</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Enhanced Graphics</h3>
+                        <p>Improved visuals and rendering quality</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-download-alt"></i>
+                        </div>
+                        <h3>Background Updates</h3>
+                        <p>Automatic updates while you play</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-steps">
+                <h3>Installation Guide</h3>
+                <div class="step-card">
+                    <span class="step-number">1</span>
+                    <strong>Download</strong> the installer from the button above
+                </div>
+                <div class="step-card">
+                    <span class="step-number">2</span>
+                    <strong>Run</strong> the installer and follow the instructions
+                </div>
+                <div class="step-card">
+                    <span class="step-number">3</span>
+                    <strong>Launch</strong> the application and log in to your account
+                </div>
+                <div class="step-card">
+                    <span class="step-number">4</span>
+                    <strong>Enjoy</strong> premium gaming experiences!
+                </div>
+                
+                <h3 style="margin-top: 3rem;">System Requirements</h3>
+                <div class="requirements">
+                    <div class="req-card">
+                        <h4>Minimum</h4>
+                        <ul>
+                            <li>Windows 10 64-bit</li>
+                            <li>Intel Core i3-3220</li>
+                            <li>4 GB RAM</li>
+                            <li>NVIDIA GTX 660 / AMD Radeon HD 7850</li>
+                            <li>5 GB storage</li>
+                        </ul>
+                    </div>
+                    <div class="req-card">
+                        <h4>Recommended</h4>
+                        <ul>
+                            <li>Windows 10/11 64-bit</li>
+                            <li>Intel Core i5-6600K</li>
+                            <li>8 GB RAM</li>
+                            <li>NVIDIA GTX 1060 / AMD RX 580</li>
+                            <li>10 GB storage</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step-card" style="margin-top: 2rem;">
+                    <h4 style="margin-bottom: 1rem;">Troubleshooting</h4>
+                    <ul style="padding-left: 1.5rem;">
+                        <li>Make sure your system meets the requirements</li>
+                        <li>Disable antivirus temporarily during installation</li>
+                        <li>Run as administrator if installation fails</li>
+                        <li>Contact support if issues persist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">Bnuy Park</div>
+                <p>A premium gaming platform with exclusive experiences from professional developers. All content is moderated before release.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="games.html"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
+                    <li><a href="launcher.html"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Server Status</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Report Issue</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Bnuy Park. All rights reserved. All experiences are properties of their respective creators.
+        </div>
+    </footer>
+
+    <!-- Water ripple effect script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = `${e.clientX}px`;
+                ripple.style.top = `${e.clientY}px`;
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>
