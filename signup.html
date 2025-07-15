@@ -1,0 +1,387 @@
+<!-- Страница регистрации (signup.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Bnuy Park</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Все стили из index.html */
+        /* Добавляем дополнительные стили для формы */
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .account-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .form-group input {
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            background: rgba(18, 19, 44, 0.5);
+            color: var(--text);
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border: 1px solid var(--accent);
+        }
+
+        .password-strength {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .terms {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .terms input {
+            margin-top: 5px;
+        }
+
+        .terms label {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .terms a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .social-login {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .social-login::before, .social-login::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            height: 1px;
+            width: 30%;
+            background: rgba(100, 255, 218, 0.2);
+        }
+
+        .social-login::before {
+            left: 0;
+        }
+
+        .social-login::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .social-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text);
+        }
+
+        .form-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gamepad logo-icon floating"></i>
+            <div class="logo-text">Bnuy Park</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="games.html"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li><a href="launcher.html"><i class="fas fa-download"></i> Launcher</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="login.html" class="active"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sign Up Content -->
+    <section class="page-content">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 2rem 5%;">
+            <div style="display: flex; flex-wrap: wrap; gap: 4rem; align-items: center;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 class="section-title">Create Your Account</h2>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                        Join Bnuy Park today to access premium games, save your progress, 
+                        and connect with friends. Start your gaming journey now!
+                    </p>
+                    
+                    <div class="feature-card" style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; gap: 1.5rem; align-items: center;">
+                            <div class="feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Exclusive Benefits</h3>
+                                <p>Access to premium games, early releases, and special events</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; gap: 1.5rem; align-items: center;">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Cloud Saves</h3>
+                                <p>Your progress is saved automatically across all devices</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div style="display: flex; gap: 1.5rem; align-items: center;">
+                            <div class="feature-icon">
+                                <i class="fas fa-friends"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Social Features</h3>
+                                <p>Connect with friends, join parties, and play together</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="form-container">
+                        <form class="account-form">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" required>
+                                <div class="password-strength">
+                                    <div class="strength-bar" id="strengthBar"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                            
+                            <div class="terms">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+                                Create Account
+                            </button>
+                            
+                            <div class="social-login">
+                                <span style="background: rgba(18, 19, 44, 0.6); padding: 0 1rem; position: relative; z-index: 2;">
+                                    or sign up with
+                                </span>
+                            </div>
+                            
+                            <div class="social-buttons">
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-discord"></i>
+                                </a>
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="form-footer">
+                                Already have an account? <a href="login.html">Sign in</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">Bnuy Park</div>
+                <p>A premium gaming platform with exclusive experiences from professional developers. All content is moderated before release.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="games.html"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
+                    <li><a href="launcher.html"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Server Status</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html"><i class="fas fa-chevron-right"></i> Sign In</a></li>
+                    <li><a href="signup.html"><i class="fas fa-chevron-right"></i> Create Account</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Recover Password</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Settings</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Bnuy Park. All rights reserved. All experiences are properties of their respective creators.
+        </div>
+    </footer>
+
+    <!-- Water ripple effect script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = `${e.clientX}px`;
+                ripple.style.top = `${e.clientY}px`;
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+            
+            // Password strength indicator
+            const passwordInput = document.getElementById('password');
+            const strengthBar = document.getElementById('strengthBar');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                let strength = 0;
+                
+                if (password.length >= 8) strength += 25;
+                if (password.match(/[a-z]+/)) strength += 25;
+                if (password.match(/[A-Z]+/)) strength += 25;
+                if (password.match(/[0-9]+/)) strength += 25;
+                
+                strengthBar.style.width = `${strength}%`;
+                
+                if (strength < 50) {
+                    strengthBar.style.background = '#ff6b6b';
+                } else if (strength < 75) {
+                    strengthBar.style.background = '#ffd166';
+                } else {
+                    strengthBar.style.background = '#64ffda';
+                }
+            });
+            
+            // Form submission
+            const form = document.querySelector('.account-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                // Simulate successful registration
+                alert('Account created successfully! Redirecting to your dashboard...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
