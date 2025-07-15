@@ -1,0 +1,627 @@
+<!-- Страница игр (games.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Bnuy Park</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4fc3f7;
+            --dark: #12132c;
+            --darker: #0a0b1d;
+            --light: #f8f9fa;
+            --accent: #64ffda;
+            --text: #e0e0ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
+            line-height: 1.6;
+            cursor: default;
+        }
+
+        /* Water ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+            border: 2px solid rgba(100, 255, 218, 0.7);
+            animation: ripple-effect 0.6s linear;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(18, 19, 44, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            animation: bounce 2s infinite;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active:after {
+            width: 100%;
+            background: var(--accent);
+        }
+
+        /* Page content */
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .game-card {
+            background: rgba(28, 30, 58, 0.6);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+
+        .game-thumb {
+            height: 200px;
+            background: linear-gradient(45deg, #4158D0, #C850C0, #FFCC70);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .game-thumb i {
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+        }
+
+        .game-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+
+        .game-info p {
+            color: #c0c0ff;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .play-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(106, 90, 205, 0.3);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .play-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Action section */
+        .action-section {
+            padding: 6rem 5%;
+            background: rgba(10, 11, 29, 0.7);
+            margin-top: 4rem;
+        }
+
+        .action-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .action-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .action-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, #12132c, #1e2a5a);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .action-image::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .action-image i {
+            font-size: 10rem;
+            color: rgba(100, 255, 218, 0.15);
+            z-index: 2;
+        }
+
+        .action-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 11, 29, 0.95);
+            padding: 4rem 5% 2rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            color: #a0a0ff;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #a0a0ff;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            color: #7777aa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(100, 255, 218, 0.05);
+            margin-top: 3rem;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {transform: translateY(0px);}
+            50% {transform: translateY(-20px);}
+            100% {transform: translateY(0px);}
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .action-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .page-content {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gamepad logo-icon floating"></i>
+            <div class="logo-text">Bnuy Park</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="games.html" class="active"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li><a href="launcher.html"><i class="fas fa-download"></i> Launcher</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Games Content -->
+    <section class="page-content">
+        <h2 class="section-title">Featured Experiences</h2>
+        
+        <div class="games-grid">
+            <!-- Game 1 -->
+            <div class="game-card">
+                <div class="game-thumb" style="background: linear-gradient(45deg, #FF416C, #FF4B2B);">
+                    <i class="fas fa-dragon"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Dragon Adventure</h3>
+                    <p>Explore fantasy worlds riding dragons. Battle monsters and discover treasures!</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Adventure</span>
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">RPG</span>
+                    </div>
+                    <a href="#" class="play-btn">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Game 2 -->
+            <div class="game-card">
+                <div class="game-thumb" style="background: linear-gradient(45deg, #2193b0, #6dd5ed);">
+                    <i class="fas fa-city"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Metropolis Life</h3>
+                    <p>Build your megacity, manage businesses and become a successful entrepreneur!</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Simulation</span>
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Strategy</span>
+                    </div>
+                    <a href="#" class="play-btn">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Game 3 -->
+            <div class="game-card">
+                <div class="game-thumb" style="background: linear-gradient(45deg, #8E2DE2, #4A00E0);">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Robot Arena</h3>
+                    <p>Create your battle robot and fight in the arena. Win and upgrade your mechanical fighter!</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Action</span>
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">PvP</span>
+                    </div>
+                    <a href="#" class="play-btn">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Game 4 -->
+            <div class="game-card">
+                <div class="game-thumb" style="background: linear-gradient(45deg, #f46b45, #eea849);">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Pirate Legends</h3>
+                    <p>Command your pirate ship, explore islands and find legendary treasures!</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Adventure</span>
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Multiplayer</span>
+                    </div>
+                    <a href="#" class="play-btn">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Game 5 -->
+            <div class="game-card">
+                <div class="game-thumb" style="background: linear-gradient(45deg, #1D976C, #93F9B9);">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Wild Survival</h3>
+                    <p>Survive in the wilderness, build shelter and hunt for food in this survival adventure!</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Survival</span>
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Exploration</span>
+                    </div>
+                    <a href="#" class="play-btn">Play Now</a>
+                </div>
+            </div>
+            
+            <!-- Game 6 -->
+            <div class="game-card">
+                <div class="game-thumb" style="background: linear-gradient(45deg, #ff0084, #33001b);">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Street Rivals</h3>
+                    <p>Customize your dream car and compete in high-speed races through city streets!</p>
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Racing</span>
+                        <span style="background: rgba(100, 255, 218, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Sports</span>
+                    </div>
+                    <a href="#" class="play-btn">Play Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-section">
+            <div class="action-container">
+                <div class="action-text">
+                    <h2>Discover New Worlds</h2>
+                    <p>Our collection is constantly growing with new premium experiences added weekly. Each game offers unique gameplay mechanics and stunning visuals.</p>
+                    <p>All experiences are:</p>
+                    <ul style="padding-left: 1.5rem; margin: 1.5rem 0;">
+                        <li>Professionally developed and moderated</li>
+                        <li>Optimized for smooth performance</li>
+                        <li>Compatible with both desktop and mobile</li>
+                        <li>Support multiplayer with friends</li>
+                    </ul>
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Browse All Games
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-star"></i> Popular Games
+                        </a>
+                    </div>
+                </div>
+                <div class="action-image">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">Bnuy Park</div>
+                <p>A premium gaming platform with exclusive experiences from professional developers. All content is moderated before release.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="games.html"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
+                    <li><a href="launcher.html"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Server Status</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Report Issue</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Bnuy Park. All rights reserved. All experiences are properties of their respective creators.
+        </div>
+    </footer>
+
+    <!-- Water ripple effect script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = `${e.clientX}px`;
+                ripple.style.top = `${e.clientY}px`;
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>
