@@ -1,0 +1,223 @@
+<!-- Страница входа (login.html) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Bnuy Park</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Все стили из signup.html */
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+
+        .remember-forgot a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-gamepad logo-icon floating"></i>
+            <div class="logo-text">Bnuy Park</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="games.html"><i class="fas fa-gamepad"></i> Games</a></li>
+                <li><a href="launcher.html"><i class="fas fa-download"></i> Launcher</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="signup.html"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Login Content -->
+    <section class="page-content">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 2rem 5%;">
+            <div style="display: flex; flex-wrap: wrap; gap: 4rem; align-items: center;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 class="section-title">Welcome Back!</h2>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+                        Sign in to access your game library, continue your progress, 
+                        and connect with friends. Your adventure awaits!
+                    </p>
+                    
+                    <div class="feature-card" style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; gap: 1.5rem; align-items: center;">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Sync Progress</h3>
+                                <p>Pick up where you left off on any device</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card" style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; gap: 1.5rem; align-items: center;">
+                            <div class="feature-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Exclusive Rewards</h3>
+                                <p>Daily login bonuses and special rewards</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div style="display: flex; gap: 1.5rem; align-items: center;">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Friends & Parties</h3>
+                                <p>Join friends in games and create parties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="form-container">
+                        <form class="account-form">
+                            <div class="form-group">
+                                <label for="loginEmail">Email or Username</label>
+                                <input type="text" id="loginEmail" name="loginEmail" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="loginPassword">Password</label>
+                                <input type="password" id="loginPassword" name="loginPassword" required>
+                            </div>
+                            
+                            <div class="remember-forgot">
+                                <label>
+                                    <input type="checkbox" name="remember">
+                                    Remember me
+                                </label>
+                                <a href="#">Forgot password?</a>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
+                                Sign In
+                            </button>
+                            
+                            <div class="social-login">
+                                <span style="background: rgba(18, 19, 44, 0.6); padding: 0 1rem; position: relative; z-index: 2;">
+                                    or sign in with
+                                </span>
+                            </div>
+                            
+                            <div class="social-buttons">
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-discord"></i>
+                                </a>
+                                <a href="#" class="social-btn">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="form-footer">
+                                Don't have an account? <a href="signup.html">Sign up</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">Bnuy Park</div>
+                <p>A premium gaming platform with exclusive experiences from professional developers. All content is moderated before release.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Platform</h3>
+                <ul class="footer-links">
+                    <li><a href="games.html"><i class="fas fa-chevron-right"></i> All Experiences</a></li>
+                    <li><a href="launcher.html"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Server Status</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links-container">
+                <h3 class="footer-heading">Account</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html"><i class="fas fa-chevron-right"></i> Sign In</a></li>
+                    <li><a href="signup.html"><i class="fas fa-chevron-right"></i> Create Account</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Recover Password</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Settings</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Bnuy Park. All rights reserved. All experiences are properties of their respective creators.
+        </div>
+    </footer>
+
+    <!-- Water ripple effect script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = `${e.clientX}px`;
+                ripple.style.top = `${e.clientY}px`;
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+            
+            // Form submission
+            const form = document.querySelector('.account-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate successful login
+                alert('Login successful! Redirecting to your dashboard...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
